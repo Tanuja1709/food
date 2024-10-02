@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Search</title>
+  <style>
+    /* General Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    /* Container */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .search-bar input[type="text"] {
+      padding: 10px;
+      width: 50%;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    /* Restaurant List */
+    .restaurants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .restaurant {
+      width: 45%;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+    .restaurant img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .restaurant h3 {
+      padding: 15px;
+      font-size: 20px;
+      background-color: #fff;
+      margin: 0;
+    }
+
+    .restaurant:hover {
+      transform: scale(1.05);
+    }
+
+    /* Restaurant Details */
+    .restaurant-details {
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .restaurant-details img {
+      width: 60%;
+      border-radius: 10px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .restaurant-details h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .restaurant-details p {
+      font-size: 18px;
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* No Restaurants Found Message */
+    .no-restaurants {
+      text-align: center;
+      font-size: 20px;
+      color: red;
+      margin-top: 20px;
+    }
+    .menu-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28A745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Space between buttons */
+}
+
+.menu-button:hover {
+  background-color: #218838;
+}
+
+
+    /* Responsive Layout */
+    @media screen and (max-width: 768px) {
+      .restaurant {
+        width: 100%;
+      }
+
+      .restaurant-details img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search for restaurants..." onkeyup="filterRestaurants()">
+    </div>
+
+    <div id="restaurantDetails" class="restaurant-details"></div>
+
+    <div class="restaurants" id="restaurantList">
+      <!-- Restaurants -->
+      <div class="restaurant" data-name="Italian Bistro" data-rating="4.5" data-best-food="Pasta, Pizza" data-services="Dine-in, Takeaway, Delivery" data-address="123 Main St, Cityville" data-contact="(123) 456-7890" data-hours="Mon-Sun: 11am - 10pm" data-description="An authentic Italian experience with classic dishes and a cozy atmosphere." onclick="showRestaurantDetails(this)">
+        <img src="https://th.bing.com/th/id/OIP.qo7Hi9Jr5pRwEQSJeDtfJAHaEK?rs=1&pid=ImgDetMain" alt="Italian Bistro">
+        <h3>Italian Bistro</h3>
+      </div>
+      <div class="restaurant" data-name="Seafood Shack" data-rating="4.6" data-best-food="Grilled Salmon, Lobster Bisque" data-services="Dine-in, Takeaway" data-address="456 Ocean Drive, Seaside" data-contact="(234) 567-8901" data-hours="Mon-Sun: 12pm - 11pm" data-description="Fresh seafood caught daily, served with a beautiful ocean view." onclick="showRestaurantDetails(this)">
+        <img src="https://th.bing.com/th/id/OIP.3s0EuLqcTVp6-QJ7j2SBswHaF7?rs=1&pid=ImgDetMain" alt="Seafood Shack">
+        <h3>Seafood Shack</h3>
+      </div>
+      <div class="restaurant" data-name="Vegan Delight" data-rating="4.8" data-best-food="Vegan Burger, Quinoa Salad" data-services="Dine-in, Delivery" data-address="789 Green St, Plantville" data-contact="(345) 678-9012" data-hours="Mon-Fri: 9am - 9pm, Sat-Sun: 10am - 8pm" data-description="Delicious plant-based meals that are healthy and sustainable." onclick="showRestaurantDetails(this)">
+        <img src="https://th.bing.com/th/id/OIP.KhogOeBKbZfksY05sAn5NwAAAA?rs=1&pid=ImgDetMain" alt="Vegan Delight">
+        <h3>Vegan Delight</h3>
+      </div>
+      <div class="restaurant" data-name="Steak House" data-rating="4.4" data-best-food="Ribeye Steak, Beef Tenderloin" data-services="Dine-in, Takeaway" data-address="321 Carnivore Rd, Meat City" data-contact="(456) 789-0123" data-hours="Mon-Sun: 5pm - 12am" data-description="The finest cuts of meat grilled to perfection in a rustic setting." onclick="showRestaurantDetails(this)">
+        <img src="https://th.bing.com/th/id/OIP._5tVV8-jYFRzLaIQ1umQBAHaEG?rs=1&pid=ImgDetMain" alt="Steak House">
+        <h3>Steak House</h3>
+      </div>
+      <div class="restaurant" data-name="Indian Spices" data-rating="4.6" data-best-food="Biryani, Paneer Tikka" data-services="Dine-in, Takeaway, Delivery" data-address="654 Spices Rd, Spice City" data-contact="(789) 012-3456" data-hours="Mon-Sun: 11am - 11pm" data-description="The best Indian cuisine with a range of spices and flavors." onclick="showRestaurantDetails(this)">
+        <img src="https://9spicesnc.com/wp-content/uploads/2021/03/logo1.png" alt="Indian Spices">
+        <h3>Indian Spices</h3>
+      </div>
+      <div class="restaurant" data-name="BBQ Grill House" data-rating="4.3" data-best-food="Grilled Meat, BBQ Ribs" data-services="Dine-in, Delivery" data-address="987 BBQ Lane, Grill City" data-contact="(123) 789-4567" data-hours="Mon-Sun: 12pm - 10pm" data-description="The best BBQ in town, with smoky flavors and tender meats." onclick="showRestaurantDetails(this)">
+        <img src="https://www.sotraveler.com/wp-content/uploads/2023/03/The-Crystal-Grill-House-Asiatique-M2.jpg" alt="BBQ Grill House">
+        <h3>BBQ Grill House</h3>
+      </div>
+    </div>
+
+    <div id="noRestaurantsFound" class="no-restaurants" style="display:none;">
+      No nearby restaurants found
+    </div>
+
+  </div>
+
+  <script>
+    function filterRestaurants() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const restaurants = document.querySelectorAll('.restaurant');
+      let found = false;
+
+      restaurants.forEach(restaurant => {
+        const restaurantName = restaurant.getAttribute('data-name').toLowerCase();
+        if (restaurantName.includes(searchInput)) {
+          restaurant.style.display = "block";
+          found = true;
+        } else {
+          restaurant.style.display = "none";
+        }
+      });
+
+      // Show or hide "No nearby restaurants found" message
+      document.getElementById('noRestaurantsFound').style.display = found ? 'none' : 'block';
+    }
+
+    function showRestaurantDetails(restaurant) {
+  const restaurantDetails = document.getElementById('restaurantDetails');
+  const name = restaurant.getAttribute('data-name');
+  const rating = restaurant.getAttribute('data-rating');
+  const bestFood = restaurant.getAttribute('data-best-food');
+  const services = restaurant.getAttribute('data-services');
+  const address = restaurant.getAttribute('data-address');
+  const contact = restaurant.getAttribute('data-contact');
+  const hours = restaurant.getAttribute('data-hours');
+  const description = restaurant.getAttribute('data-description');
+  const imageSrc = restaurant.querySelector('img').src;
+
+  // Populate the restaurant details section with an additional Menu button
+  restaurantDetails.innerHTML = `
+    <img src="${imageSrc}" alt="${name}">
+    <h3>${name}</h3>
+    <p><strong>Rating:</strong> ${rating}/5</p>
+    <p><strong>Best Food:</strong> ${bestFood}</p>
+    <p><strong>Services:</strong> ${services}</p>
+    <p><strong>Address:</strong> ${address}</p>
+    <p><strong>Contact:</strong> ${contact}</p>
+    <p><strong>Hours:</strong> ${hours}</p>
+    <p><strong>Description:</strong> ${description}</p>
+    <button class="back-button" onclick="goBack()">Go Back</button>
+    <button class="menu-button" onclick="goToMenu()">Menu</button>
+  `;
+
+  // Hide the restaurant list and show the details
+  document.getElementById('restaurantList').style.display = 'none';
+  restaurantDetails.style.display = 'block';
+}
+
+// Function to redirect to menu.html
+function goToMenu() {
+  window.location.href = './menu.html';
+}
+
+
+    function goBack() {
+      // Show the restaurant list and hide the details
+      document.getElementById('restaurantList').style.display = 'flex';
+      document.getElementById('restaurantDetails').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

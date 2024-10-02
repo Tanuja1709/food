@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #ff6f61;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    background-color: #ff856f;
+    border-radius: 5px;
+}
+
+nav ul li:hover {
+    background-color: #ff4b36;
+}
+
+.menu-section {
+    padding: 40px;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.menu-item {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px);
+}
+
+.menu-item img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.menu-item h3 {
+    margin: 15px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.menu-item p {
+    margin-bottom: 15px;
+    color: #777;
+}
+
+.menu-item button {
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.menu-item button:hover {
+    background-color: #ff4b36;
+}
+
+.cart-section {
+    padding: 40px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.cart-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#cart-items {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+#cart-items li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ff6f61;
+    color: white;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .menu-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Order your food</h1>
+        <nav>
+            <ul class="category-nav">
+                <li data-category="biryani">Biryani</li>
+                <li data-category="tandoori">Tandoori</li>
+                <li data-category="chinese">Chinese</li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div id="menu-container" class="menu-container">
+            <!-- Menu Items will be injected here dynamically -->
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will appear here -->
+        </ul>
+        <p><strong>Total:</strong> ₹<span id="cart-total">0.00</span></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 QuickBite. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Updated Menu items data for different categories
+const menuItems = {
+    biryani: [
+        { name: "Chicken Fry Piece Biryani", price: 250, rating: 4.5},
+        { name: "Veg Biryani", price: 200, rating: 4.3},
+        { name: "Mutton Biryani", price: 300, rating: 4.6},
+        { name: "Hyderabadi Dum Biryani", price: 280, rating: 4.7},
+        { name: "Egg Biryani", price: 150, rating: 4.0},
+        { name: "Prawn Biryani", price: 350, rating: 4.8},
+        { name: "Kolkata Biryani", price: 270, rating: 4.2},
+        { name: "Fish Biryani", price: 320, rating: 4.4},
+        { name: "Paneer Biryani", price: 220, rating: 4.1}
+    ],
+    tandoori: [
+                { name: "Chicken Tandoori", price: 220, rating: 4.6},
+                { name: "Paneer Tikka", price: 180, rating: 4.3},
+                { name: "Fish Tandoori", price: 250, rating: 4.5},
+                { name: "Mutton Seekh Kebab", price: 300, rating: 4.8},
+                { name: "Malai Chicken Tikka", price: 270, rating: 4.7},
+                { name: "Tandoori Roti", price: 50, rating: 4.2},
+                { name: "Tandoori Prawns", price: 350, rating: 4.9},
+                { name: "Lamb Chops", price: 320, rating: 4.7},
+                { name: "Veg Tandoori Platter", price: 280, rating: 4.5}
+
+    ],
+    chinese: [
+            { name: "Veg Hakka Noodles", price: 180, rating: 4.3},
+            { name: "Chicken Manchurian", price: 200, rating: 4.5},
+            { name: "Vegetable Chow Mein", price: 160, rating: 4.1},
+            { name: "Chilli Chicken", price: 220, rating: 4.6},
+            { name: "Schezwan Fried Rice", price: 200, rating: 4.4},
+            { name: "Spring Rolls", price: 120, rating: 4.0},
+            { name: "Dim Sum", price: 250, rating: 4.7},
+            { name: "Kung Pao Chicken", price: 230, rating: 4.6},
+            { name: "Sweet and Sour Pork", price: 270, rating: 4.8}
+
+    ]
+};
+
+const menuContainer = document.getElementById('menu-container');
+
+// Function to display menu items
+function displayMenu(category) {
+    menuContainer.innerHTML = '';
+    const items = menuItems[category];
+
+    items.forEach(item => {
+        const menuItem = document.createElement('div');
+        menuItem.classList.add('menu-item');
+
+        menuItem.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>Price: ₹${item.price} | Rating: ${item.rating}</p>
+            <button onclick="addToCart(${item.price}, '${item.name}')">Add to Cart</button>
+        `;
+        menuContainer.appendChild(menuItem);
+    });
+}
+
+// Initialize with biryani items
+displayMenu('biryani');
+
+// Category change logic
+document.querySelectorAll('.category-nav li').forEach(item => {
+    item.addEventListener('click', (e) => {
+        const category = e.target.getAttribute('data-category');
+        displayMenu(category);
+    });
+});
+
+let cart = [];
+
+// Function to add items to the cart
+function addToCart(price, name) {
+    cart.push({ price, name });
+    displayCart();
+}
+
+// Function to display the cart
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalDisplay = document.getElementById('cart-total');
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price;
+        const cartItem = document.createElement('li');
+        cartItem.textContent = `${item.name} - ₹${item.price}`;
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartTotalDisplay.textContent = total.toFixed(2);
+}
+
+    </script>
+</body>
+</html>

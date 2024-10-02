@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery System</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #ff6347;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo h1 {
+    color: white;
+    font-size: 24px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.order-now {
+    background-color: white;
+    color: #ff6347;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.hero {
+    height: 70vh;
+    background-image: url('food-background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+    color: orange;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.order-button {
+    background-color: #ff6347;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.services {
+    padding: 50px;
+    text-align: center;
+}
+
+.service-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.service {
+    text-align: center;
+    width: 30%;
+}
+
+.service img {
+    width: 100px;
+    height: 100px;
+}
+
+.service h4 {
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.service p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>FoodExpress</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="./restaurant.html">Restaurant</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Delicious Food, Delivered to You</h2>
+            <p>Order your favorite meals from the comfort of your home and get them delivered fast.</p>
+            <a href="./restaurant.html" class="order-button">Order Now</a>
+        </div>
+    </section>
+
+    <section class="services">
+        <h3>What We Offer</h3>
+        <div class="service-container">
+            <div class="service">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH6vgedIw25SPuCdb9gyTtK62oMY0MUj1oTg&s" width="100" height="100" alt="Fast Delivery">
+                <h4>Fast Delivery</h4>
+                <p>Get your food delivered in no time.</p>
+            </div>
+            <div class="service">
+                <img src="https://www.shutterstock.com/shutterstock/photos/284191817/display_1500/stock-vector-fresh-food-vector-logo-design-template-fruits-and-vegetables-or-gardening-horticulture-icon-284191817.jpg" alt="Fresh Food">
+                <h4>Fresh Food</h4>
+                <p>Always fresh and hygienic food prepared for you.</p>
+            </div>
+            <div class="service">
+                <img src="https://www.shutterstock.com/image-photo/variety-exquisite-dishes-share-hotel-260nw-2428114355.jpg" height="200" width="200"alt="Variety">
+                <h4>Wide Variety</h4>
+                <p>Choose from a wide variety of cuisines.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 FoodExpress. All Rights Reserved.</p>
+    </footer>
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const orderButton = document.querySelector('.order-button');
+
+    orderButton.addEventListener('click', function() {
+        alert('Redirecting to Order Page!');
+        // Redirect to the actual order page, e.g.,
+        // window.location.href = "order.html";
+    });
+});
+    </script> -->
+</body>
+</html>
