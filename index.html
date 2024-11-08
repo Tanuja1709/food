@@ -207,6 +207,7 @@
     </main>
 
     <script>
+        // Toggle between login and sign up forms
         const loginForm = document.querySelector(".login-form");
         const signupForm = document.querySelector(".signup-form");
         const signUpButtons = document.querySelectorAll(".sign-up-btn");
@@ -229,10 +230,10 @@
             });
         });
 
-        // Redirect to home.html without validation when login button is clicked
-        document.getElementById("loginButton").addEventListener("click", () => {
-            // Redirect to home.html directly without validating credentials
-            window.location.href = "./home.html";
+        // Fix the redirect to home.html when login button is clicked
+        document.getElementById("loginButton").addEventListener("click", (event) => {
+            event.preventDefault(); // Prevents the form from submitting
+            window.location.href = "./home.html"; // Redirects to home.html
         });
     </script>
 </body>
