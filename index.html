@@ -183,8 +183,8 @@
             <form action="" class="login-form active">
                 <h2 class="login-label">Login Form</h2>
                 <p>Enter your login credentials.</p>
-                <input type="email" id="lemail" placeholder="Email" required />
-                <input type="password" id="lpassword" placeholder="Password" required />
+                <input type="email" id="lemail" placeholder="Email" />
+                <input type="password" id="lpassword" placeholder="Password" />
                 <button type="button" id="loginButton">Login</button>
                 <div class="form-text">
                     <p>Don't have an account? <a href="#" class="sign-up-btn">Sign up here</a></p>
@@ -231,9 +231,9 @@
         });
 
         // Fix the redirect to home.html when login button is clicked
-        document.getElementById("loginButton").addEventListener("click", (event) => {
-            event.preventDefault(); // Prevents the form from submitting
-            window.location.href = "./home.html"; // Redirects to home.html
+        document.getElementById("loginButton").addEventListener("click", () => {
+            // Redirect to home.html immediately after clicking the login button
+            window.location.href = "./home.html"; 
         });
     </script>
 </body>
